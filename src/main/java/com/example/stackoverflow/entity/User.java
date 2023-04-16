@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -27,6 +30,9 @@ public class User {
 
   @Column(name = "password")
   private String password;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Question> questions = new ArrayList<>();
 
   public User(String firstName, String lastName, String email, String password) {
     this.firstName = firstName;

@@ -18,8 +18,9 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "title")
     private String title;
@@ -35,4 +36,8 @@ public class Question {
 
     @Column(name = "tag")
     private String tag;
+
+    public Question(User user) {
+        this.user = user;
+    }
 }

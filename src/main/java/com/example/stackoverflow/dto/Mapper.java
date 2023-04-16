@@ -17,6 +17,9 @@ public class Mapper {
         userResponseDTO.setFirstName(user.getFirstName());
         userResponseDTO.setLastName(user.getLastName());
         userResponseDTO.setEmail(user.getEmail());
+        userResponseDTO.setQuestionIds(
+                user.getQuestions().stream().map(Question::getId).collect(Collectors.toList())
+        );
         return userResponseDTO;
     }
 
@@ -29,7 +32,7 @@ public class Mapper {
             return null;
         QuestionResponseDTO questionResponseDTO = new QuestionResponseDTO();
         questionResponseDTO.setId(question.getId());
-        questionResponseDTO.setUserId(question.getUserId());
+        questionResponseDTO.setUserId(question.getUser().getId());
         questionResponseDTO.setTitle(question.getTitle());
         questionResponseDTO.setText(question.getText());
         questionResponseDTO.setTimestamp(question.getTimestamp());

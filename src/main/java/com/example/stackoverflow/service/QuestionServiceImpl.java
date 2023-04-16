@@ -4,6 +4,7 @@ import com.example.stackoverflow.dto.Mapper;
 import com.example.stackoverflow.dto.request.QuestionRequestDTO;
 import com.example.stackoverflow.dto.response.QuestionResponseDTO;
 import com.example.stackoverflow.entity.Question;
+import com.example.stackoverflow.entity.User;
 import com.example.stackoverflow.repository.QuestionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.stream.StreamSupport;
 public class QuestionServiceImpl implements QuestionService{
 
     private final QuestionRepository questionRepository;
+    private final UserService userService;
 
     @Override
     public Question getQuestion(Integer id) {
@@ -31,8 +33,10 @@ public class QuestionServiceImpl implements QuestionService{
     public QuestionResponseDTO addQuestion(QuestionRequestDTO questionRequestDTO) {
         if (questionRequestDTO.getUserId() == null)
             throw new IllegalArgumentException("need user id in order to add question");
-        Question question = new Question();
-        question.setUserId(questionRequestDTO.getUserId());
+        User user = userService.getUser(questionRequestDTO.getUserId());
+        if (user == null)
+            throw new IllegalArgumentException("add question: user id " + questionRequestDTO.getUserId() + " could not be found");
+        Question question = new Question(user);
         question.setTitle(questionRequestDTO.getTitle());
         question.setText(questionRequestDTO.getText());
         question.setTimestamp(LocalDateTime.now());
@@ -68,7 +72,6 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     public QuestionResponseDTO editQuestionById(Integer id, QuestionRequestDTO questionRequestDTO) {
         Question question = getQuestion(id);
-        question.setUserId(questionRequestDTO.getUserId());
         question.setTitle(questionRequestDTO.getTitle());
         question.setText(questionRequestDTO.getText());
         question.setTimestamp(LocalDateTime.now());
