@@ -40,6 +40,9 @@ public class Mapper {
         questionResponseDTO.setTimestamp(question.getTimestamp());
         questionResponseDTO.setPhoto(question.getPhoto());
         questionResponseDTO.setTag(question.getTag());
+        questionResponseDTO.setAnswerIds(
+                question.getAnswers().stream().map(Answer::getId).collect(Collectors.toList())
+        );
         return questionResponseDTO;
     }
 

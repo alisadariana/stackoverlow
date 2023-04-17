@@ -34,6 +34,9 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Question> questions = new ArrayList<>();
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Answer> answers = new ArrayList<>();
+
   public User(String firstName, String lastName, String email, String password) {
     this.firstName = firstName;
     this.lastName = lastName;
