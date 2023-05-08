@@ -17,7 +17,7 @@ public class QuestionResponseDTO {
     private String text;
     private LocalDateTime timestamp;
     private String photo;
-    private String tag;
     private List<Integer> answerIds;
-
+    private List<String> tagNames;
+    private List<Integer> tagIds;
 }

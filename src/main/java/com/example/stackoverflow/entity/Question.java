@@ -36,11 +36,16 @@ public class Question {
     @Column(name = "photo")
     private String photo;
 
-    @Column(name = "tag")
-    private String tag;
-
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable (
+            name = "question_tag",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags = new ArrayList<>();
 
     public Question(User user) {
         this.user = user;

@@ -21,6 +21,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     private final QuestionRepository questionRepository;
     private final UserService userService;
+    private final TagService tagService;
 
     @Override
     public Question getQuestion(Integer id) {
@@ -41,7 +42,12 @@ public class QuestionServiceImpl implements QuestionService{
         question.setText(questionRequestDTO.getText());
         question.setTimestamp(LocalDateTime.now());
         question.setPhoto(questionRequestDTO.getPhoto());
-        question.setTag(questionRequestDTO.getTag());
+        question.setTags(
+                questionRequestDTO.getTagIds()
+                        .stream()
+                        .map(tagService::getTag)
+                        .collect(Collectors.toList())
+        );
         Question question1 = questionRepository.save(question);
         return Mapper.questionToQuestionResponseDTO(question1);
     }
@@ -76,7 +82,6 @@ public class QuestionServiceImpl implements QuestionService{
         question.setText(questionRequestDTO.getText());
         question.setTimestamp(LocalDateTime.now());
         question.setPhoto(questionRequestDTO.getPhoto());
-        question.setTag(questionRequestDTO.getTag());
         return Mapper.questionToQuestionResponseDTO(question);
     }
 }

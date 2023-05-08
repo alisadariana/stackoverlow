@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,5 +15,5 @@ public class QuestionRequestDTO {
     private String title;
     private String text;
     private String photo;
-    private String tag;
+    private List<Integer> tagIds = new ArrayList<>();
 }
