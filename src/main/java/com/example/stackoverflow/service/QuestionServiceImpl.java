@@ -68,10 +68,9 @@ public class QuestionServiceImpl implements QuestionService{
 
 
     @Override
-    public QuestionResponseDTO deleteQuestionById(Integer id) {
+    public void deleteQuestionById(Integer id) {
         Question question = getQuestion(id);
         questionRepository.delete(question);
-        return Mapper.questionToQuestionResponseDTO(question);
     }
 
     @Transactional

@@ -4,6 +4,7 @@ import com.example.stackoverflow.dto.request.QuestionRequestDTO;
 import com.example.stackoverflow.dto.response.QuestionResponseDTO;
 import com.example.stackoverflow.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,9 +35,9 @@ public class QuestionController {
     }
 
     @GetMapping("/delete/{id}")
-    @ResponseBody
-    public QuestionResponseDTO deleteQuestionById(@PathVariable final Integer id) {
-        return questionService.deleteQuestionById(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteQuestionById(@PathVariable final Integer id) {
+        questionService.deleteQuestionById(id);
     }
 
     @PostMapping("/edit/{id}")

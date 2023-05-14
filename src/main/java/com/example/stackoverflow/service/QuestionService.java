@@ -13,6 +13,6 @@ public interface QuestionService {
     QuestionResponseDTO addQuestion(QuestionRequestDTO questionRequestDTO);
     List<QuestionResponseDTO> getQuestions();
     QuestionResponseDTO getQuestionById(Integer id);
-    QuestionResponseDTO deleteQuestionById(Integer id);
+    void deleteQuestionById(Integer id);
     QuestionResponseDTO editQuestionById(Integer id, QuestionRequestDTO questionRequestDTO);
 }
