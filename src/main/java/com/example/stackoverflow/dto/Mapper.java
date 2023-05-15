@@ -21,6 +21,7 @@ public class Mapper {
         userResponseDTO.setFirstName(user.getFirstName());
         userResponseDTO.setLastName(user.getLastName());
         userResponseDTO.setEmail(user.getEmail());
+        userResponseDTO.setPassword(user.getPassword());
         userResponseDTO.setQuestionIds(
                 user.getQuestions().stream().map(Question::getId).collect(Collectors.toList())
         );
