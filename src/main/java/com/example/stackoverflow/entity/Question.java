@@ -13,13 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table (name = "question")
-public class Question {
-    @Id
-    @Column(name = "question_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+@Table(name = "question")
+public class Question extends Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -40,14 +35,18 @@ public class Question {
     private List<Answer> answers = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable (
+    @JoinTable(
             name = "question_tag",
-            joinColumns = @JoinColumn(name = "question_id"),
+            joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private List<Tag> tags = new ArrayList<>();
 
     public Question(User user) {
         this.user = user;
+    }
+
+    public Integer getId() {
+        return super.getId();
     }
 }
