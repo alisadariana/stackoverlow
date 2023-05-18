@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,6 +29,9 @@ public class Post {
 
     @Column(name = "photo")
     private String photo;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Vote> votes = new ArrayList<>();
 
     public Post(User user) {
         this.timestamp = LocalDateTime.now();

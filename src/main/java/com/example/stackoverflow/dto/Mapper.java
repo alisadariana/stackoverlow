@@ -1,13 +1,7 @@
 package com.example.stackoverflow.dto;
 
-import com.example.stackoverflow.dto.response.AnswerResponseDTO;
-import com.example.stackoverflow.dto.response.QuestionResponseDTO;
-import com.example.stackoverflow.dto.response.TagResponseDTO;
-import com.example.stackoverflow.dto.response.UserResponseDTO;
-import com.example.stackoverflow.entity.Answer;
-import com.example.stackoverflow.entity.Question;
-import com.example.stackoverflow.entity.Tag;
-import com.example.stackoverflow.entity.User;
+import com.example.stackoverflow.dto.response.*;
+import com.example.stackoverflow.entity.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,6 +51,12 @@ public class Mapper {
                         .map(Tag::getId)
                         .collect(Collectors.toList())
         );
+        questionResponseDTO.setVotes(
+                question.getVotes()
+                        .stream()
+                        .map(Mapper::voteToVoteResponseDTO)
+                        .collect(Collectors.toList())
+        );
         return questionResponseDTO;
     }
 
@@ -93,5 +93,14 @@ public class Mapper {
 
     public static List<TagResponseDTO> tagsToTagResponseDTO(List<Tag> tags) {
         return  tags.stream().map(Mapper::tagToTagResponseDTO).collect(Collectors.toList());
+    }
+
+    public static VoteResponseDTO voteToVoteResponseDTO(Vote vote) {
+        VoteResponseDTO voteResponseDTO = new VoteResponseDTO();
+        voteResponseDTO.setId(vote.getId());
+        voteResponseDTO.setUserId(vote.getUser().getId());
+        voteResponseDTO.setPostId(vote.getPost().getId());
+        voteResponseDTO.setVoteType(vote.getVoteType());
+        return voteResponseDTO;
     }
 }
