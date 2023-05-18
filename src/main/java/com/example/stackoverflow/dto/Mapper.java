@@ -74,6 +74,12 @@ public class Mapper {
         answerResponseDTO.setText(answer.getText());
         answerResponseDTO.setTimestamp(answer.getTimestamp());
         answerResponseDTO.setPhoto(answer.getPhoto());
+        answerResponseDTO.setVotes(
+                answer.getVotes()
+                        .stream()
+                        .map(Mapper::voteToVoteResponseDTO)
+                        .collect(Collectors.toList())
+        );
         return answerResponseDTO;
     }
 
