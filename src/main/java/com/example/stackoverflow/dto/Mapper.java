@@ -57,6 +57,14 @@ public class Mapper {
                         .map(Mapper::voteToVoteResponseDTO)
                         .collect(Collectors.toList())
         );
+        int count = 0;
+        for (Vote vote : question.getVotes()) {
+            if (vote.getVoteType() == VoteType.UP)
+                count++;
+            else
+                count--;
+        }
+        questionResponseDTO.setVoteCount(count);
         return questionResponseDTO;
     }
 
@@ -80,6 +88,14 @@ public class Mapper {
                         .map(Mapper::voteToVoteResponseDTO)
                         .collect(Collectors.toList())
         );
+        int count = 0;
+        for (Vote vote : answer.getVotes()) {
+            if (vote.getVoteType() == VoteType.UP)
+                count++;
+            else
+                count--;
+        }
+        answerResponseDTO.setVoteCount(count);
         return answerResponseDTO;
     }
 

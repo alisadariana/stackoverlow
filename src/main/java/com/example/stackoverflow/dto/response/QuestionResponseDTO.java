@@ -21,4 +21,5 @@ public class QuestionResponseDTO {
     private List<String> tagNames;
     private List<Integer> tagIds;
     private List<VoteResponseDTO> votes;
+    private Integer voteCount;
 }

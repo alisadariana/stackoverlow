@@ -18,4 +18,5 @@ public class AnswerResponseDTO {
     private LocalDateTime timestamp;
     private String photo;
     private List<VoteResponseDTO> votes;
+    private Integer voteCount;
 }
