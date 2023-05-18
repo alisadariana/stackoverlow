@@ -13,6 +13,9 @@ import java.util.List;
 @Table(name = "question")
 public class Question extends Post {
 
+    static final double UP_VOTE_SCORE = 2.5F;
+    static final double DOWN_VOTE_SCORE = -1.5F;
+
     @Column(name = "title")
     private String title;
 
@@ -37,5 +40,17 @@ public class Question extends Post {
 
     public Integer getId() {
         return super.getId();
+    }
+
+    public Double computeScore() {
+        double score = 0;
+        for (Vote vote : getVotes()) {
+            if (vote.getVoteType() == VoteType.UP) {
+                score += UP_VOTE_SCORE;
+            } else {
+                score += DOWN_VOTE_SCORE;
+            }
+        }
+        return score;
     }
 }

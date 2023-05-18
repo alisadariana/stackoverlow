@@ -19,6 +19,7 @@ public class Mapper {
         userResponseDTO.setQuestionIds(
                 user.getQuestions().stream().map(Question::getId).collect(Collectors.toList())
         );
+        userResponseDTO.setScore(user.computeScore());
         return userResponseDTO;
     }
 

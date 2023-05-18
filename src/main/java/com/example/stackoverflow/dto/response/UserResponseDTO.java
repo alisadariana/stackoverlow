@@ -16,4 +16,5 @@ public class UserResponseDTO {
     private String email;
     private String password;
     private List<Integer> questionIds;
+    private Double score;
 }

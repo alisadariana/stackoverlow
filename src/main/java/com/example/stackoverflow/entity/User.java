@@ -51,4 +51,19 @@ public class User {
     else
       this.password = password;
   }
+
+  public Double computeScore() {
+    double score = 0;
+    score += this.questions
+            .stream()
+            .map(Question::computeScore)
+            .mapToDouble(Double::doubleValue)
+            .sum();
+    score += this.answers
+            .stream()
+            .map(Answer::computeScore)
+            .mapToDouble(Double::doubleValue)
+            .sum();
+    return score;
+  }
 }
