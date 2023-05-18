@@ -37,6 +37,9 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Answer> answers = new ArrayList<>();
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Vote> votes = new ArrayList<>();
+
   public User(String firstName, String lastName, String email, String password) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -63,6 +66,11 @@ public class User {
             .stream()
             .map(Answer::computeScore)
             .mapToDouble(Double::doubleValue)
+            .sum();
+    score += this.votes
+            .stream()
+            .filter(vote -> vote.getVoteType() == VoteType.DOWN)
+            .mapToDouble(vote -> -1.5F)
             .sum();
     return score;
   }
