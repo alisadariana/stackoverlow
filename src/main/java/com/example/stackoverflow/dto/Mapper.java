@@ -20,6 +20,7 @@ public class Mapper {
                 user.getQuestions().stream().map(Question::getId).collect(Collectors.toList())
         );
         userResponseDTO.setScore(user.computeScore());
+        userResponseDTO.setRole(user.getRole());
         return userResponseDTO;
     }
 

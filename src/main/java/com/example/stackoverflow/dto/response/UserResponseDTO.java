@@ -1,5 +1,6 @@
 package com.example.stackoverflow.dto.response;
 
+import com.example.stackoverflow.entity.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,5 @@ public class UserResponseDTO {
     private String password;
     private List<Integer> questionIds;
     private Double score;
+    private RoleType role;
 }

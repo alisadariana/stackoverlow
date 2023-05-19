@@ -31,6 +31,9 @@ public class User {
   @Column(name = "password")
   private String password;
 
+  @Column(name = "role")
+  private RoleType role;
+
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Question> questions = new ArrayList<>();
 
@@ -40,7 +43,7 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Vote> votes = new ArrayList<>();
 
-  public User(String firstName, String lastName, String email, String password) {
+  public User(String firstName, String lastName, String email, String password, RoleType role) {
     this.firstName = firstName;
     this.lastName = lastName;
 
@@ -53,6 +56,11 @@ public class User {
       this.password = "password";
     else
       this.password = password;
+
+    if (role == null)
+      this.role = RoleType.USER;
+    else
+      this.role = role;
   }
 
   public Double computeScore() {
