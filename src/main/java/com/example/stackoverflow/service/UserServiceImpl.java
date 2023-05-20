@@ -18,6 +18,7 @@ import java.util.stream.StreamSupport;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     @Override
     public User getUser(Integer id) {
@@ -72,6 +73,9 @@ public class UserServiceImpl implements UserService{
     public UserResponseDTO banUserById(Integer id) {
         User user = getUser(id);
         user.setBanned(true);
+        System.out.println(emailService.sendSimpleMail(
+                user.getEmail(), "You have been banned",
+                        "You have been banned"));
         return Mapper.userToUserResponseDTO(user);
     }
 
