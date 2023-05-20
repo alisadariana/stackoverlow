@@ -19,4 +19,5 @@ public class UserResponseDTO {
     private List<Integer> questionIds;
     private Double score;
     private RoleType role;
+    private Boolean banned;
 }

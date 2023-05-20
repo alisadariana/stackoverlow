@@ -16,4 +16,7 @@ public interface UserService {
     UserResponseDTO deleteUserById(Integer id);
     UserResponseDTO editUserById(Integer id, UserRequestDTO userRequestDTO);
 
+    UserResponseDTO banUserById(Integer id);
+
+    UserResponseDTO unbanUserById(Integer id);
 }

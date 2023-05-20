@@ -66,4 +66,20 @@ public class UserServiceImpl implements UserService{
         user.setPassword(userRequestDTO.getPassword());
         return Mapper.userToUserResponseDTO(user);
     }
+
+    @Transactional
+    @Override
+    public UserResponseDTO banUserById(Integer id) {
+        User user = getUser(id);
+        user.setBanned(true);
+        return Mapper.userToUserResponseDTO(user);
+    }
+
+    @Transactional
+    @Override
+    public UserResponseDTO unbanUserById(Integer id) {
+        User user = getUser(id);
+        user.setBanned(false);
+        return Mapper.userToUserResponseDTO(user);
+    }
 }

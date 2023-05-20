@@ -34,6 +34,9 @@ public class User {
   @Column(name = "role")
   private RoleType role;
 
+  @Column(name = "banned")
+  private Boolean banned = false;
+
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Question> questions = new ArrayList<>();
 

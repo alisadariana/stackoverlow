@@ -21,6 +21,7 @@ public class Mapper {
         );
         userResponseDTO.setScore(user.computeScore());
         userResponseDTO.setRole(user.getRole());
+        userResponseDTO.setBanned(user.getBanned());
         return userResponseDTO;
     }
 

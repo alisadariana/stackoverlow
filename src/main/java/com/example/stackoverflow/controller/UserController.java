@@ -45,4 +45,16 @@ public class UserController {
                                         @PathVariable final Integer id) {
         return userService.editUserById(id, userRequestDTO);
     }
+
+    @GetMapping("/ban/{id}")
+    @ResponseBody
+    public UserResponseDTO banUserById(@PathVariable final Integer id) {
+        return userService.banUserById(id);
+    }
+
+    @GetMapping("/unban/{id}")
+    @ResponseBody
+    public UserResponseDTO unbanUserById(@PathVariable final Integer id) {
+        return userService.unbanUserById(id);
+    }
 }
