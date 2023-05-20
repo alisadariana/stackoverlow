@@ -7,6 +7,7 @@ import com.example.stackoverflow.entity.Answer;
 import com.example.stackoverflow.entity.Question;
 import com.example.stackoverflow.entity.User;
 import com.example.stackoverflow.repository.AnswerRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -70,6 +71,7 @@ public class AnswerServiceImpl implements AnswerService{
         return Mapper.answerToAnswerResponseDTO(answer);
     }
 
+    @Transactional
     @Override
     public AnswerResponseDTO editAnswerById(Integer id, AnswerRequestDTO answerRequestDTO) {
         Answer answer = getAnswer(id);
